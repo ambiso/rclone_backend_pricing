@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>
+      rclone backends pricing calculator
+    </title>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <form>
+      <label for="months">
+        Months
+      </label>
+      <input type="number" id="months" min="1" max="1188" oninput="recompute()" value="1">
+
+      <label for="currency">
+        Currency
+      </label>
+      <select name="currency" id="currency" oninput="recompute()">
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option>
+      </select>
+
+      <label for="initial_upload">
+        Initial Upload (GB)
+      </label>
+      <input type="number" id="initial_upload" min="1" oninput="recompute()" value="1000">
+
+      <label for="download">
+        Download GB/mo
+      </label>
+      <input type="number" id="download" min="1" oninput="recompute()" value="250">
+
+      <label for="upload">
+        Upload GB/mo
+      </label>
+      <input type="number" id="upload" min="1" value="0" oninput="recompute()">
+
+      <label for="delete">
+        Delete GB/mo
+      </label>
+      <input type="number" id="delete" min="1" value="0" oninput="recompute()">
+
+      <label for="enterprise">
+        Enterprise
+      </label>
+      <input type="checkbox" id="enterprise" value="0" oninput="recompute()">
+    </form>
+
+    <table id="results">
+    </table>
+  </body>
+</html>

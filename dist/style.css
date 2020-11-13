@@ -1,0 +1,12 @@
+form {
+  display: grid;
+  grid-template-columns: 10em 1fr;
+}
+
+label {
+  grid-column: 1 / 2;
+}
+
+input, select {
+  grid-column: 2 / 3;
+}
