@@ -79,6 +79,7 @@ def choose_tiered_plan(plans: List[TieredPlan], storage: List[int], constraints:
 
 
 def fichier_extra_cost(s: int):
+    # For now we just assume all storage is cold
     if s > 2000:
         return (s-2000)//1000*100
     else:
