@@ -96,16 +96,13 @@ function choose_tiered_plan(constraints: UserInput, provider: Provider, storage_
 
   for (let i = 1; i <= constraints.months; ++i) {
     for (let plan of provider.tiered_plans) {
-      if (plan.months > i) {
-        continue;
-      }
-
       let extra_cost = 0;
-      for (let m = i-plan.months; m < i; ++m) {
+      let plan_begin = Math.max(0, i-plan.months);
+      for (let m = plan_begin; m < i; ++m) {
         extra_cost += plan.extra_cost(constraints, plan, storage_for_months[m]);
       }
 
-      let cost_this_plan = cost_so_far[i-plan.months] + plan.cost + extra_cost;
+      let cost_this_plan = cost_so_far[plan_begin] + plan.cost + extra_cost;
       if (cost_this_plan < cost_so_far[i]) {
         cost_so_far[i] = cost_this_plan;
         backlinks[i] = plan;
@@ -114,7 +111,7 @@ function choose_tiered_plan(constraints: UserInput, provider: Provider, storage_
   }
   // Find the cheapest plan: follow the backlinks
   let plans = [];
-  for(let i = backlinks.length - 1; i != 0; i -= backlinks[i].months) {
+  for(let i = backlinks.length - 1; i != 0; i = Math.max(0, i - backlinks[i].months)) {
     plans.push(backlinks[i]);
   }
   plans.reverse();
