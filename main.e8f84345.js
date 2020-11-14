@@ -18,4 +18,4 @@ var t=arguments[3];Object.defineProperty(exports,"__esModule",{value:!0}),export
 },{"tslib":"vCxL","vue-property-decorator":"oHlX","./components/StorageForm.vue":"PXEk"}],"ZCfc":[function(require,module,exports) {
 "use strict";var e=r(require("vue")),u=r(require("./App.vue"));function r(e){return e&&e.__esModule?e:{default:e}}e.default.config.productionTip=!1,new e.default({render:function(e){return e(u.default)}}).$mount("#app");
 },{"vue":"QPfz","./App.vue":"Js2s"}]},{},["ZCfc"], null)
-//# sourceMappingURL=/main.e8f84345.js.map
+//# sourceMappingURL=/rclone_backend_pricing/main.e8f84345.js.map
