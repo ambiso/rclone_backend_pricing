@@ -39,11 +39,6 @@
     </label>
     <input type="checkbox" id="enterprise" v-model="enterprise">
   </form>
-<!-- <ul id="example-2">
-  <li v-for="(item, index) in results">
-    {{ parentMessage }} - {{ index }} - {{ item.message }}
-  </li>
-</ul> -->
 
   <table id="results">
     <tr v-for="item in results" v-bind:key="item[0].name">
@@ -51,7 +46,9 @@
         {{item[0].name}}
       </td>
       <td>
-        {{item[1][0].name}}
+        <span class="plan-result" v-for="plan in item[1]" v-bind:key="plan[0].name">
+          {{ plan[0].name }} x{{plan[1]}}
+        </span>
       </td>
       <td>
         {{item[2]}}
@@ -74,7 +71,7 @@ export default class StorageForm extends Vue {
   delete_mo = 0
   enterprise = false
 
-  get results(): [Provider, TieredPlan[], number][] {
+  get results(): [Provider, [TieredPlan, number][], number][] {
     return compute_plans(new UserInput(
       this.months, 
       Currency[this.currency as keyof typeof Currency], 
@@ -101,4 +98,9 @@ label {
 input, select {
   grid-column: 2 / 3;
 }
+
+.plan-result:not(:last-child)::after {
+  content: ",";
+}
+
 </style>

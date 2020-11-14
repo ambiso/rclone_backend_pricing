@@ -88,7 +88,7 @@ function compute_storage_requirements(constraints: UserInput): number[] {
 }
 
 /// Returns a list of tiered plans to subscribe to in succession
-export function choose_tiered_plan(constraints: UserInput, provider: Provider, storage_for_months: number[]): [Provider, TieredPlan[], number] {
+export function choose_tiered_plan(constraints: UserInput, provider: Provider, storage_for_months: number[]): [Provider, [TieredPlan, number][], number] {
   const cost_so_far = new Array(constraints.months+1).fill(Infinity);
   const backlinks: TieredPlan[] = new Array(constraints.months+1); // Which plan we took
 
@@ -110,16 +110,20 @@ export function choose_tiered_plan(constraints: UserInput, provider: Provider, s
     }
   }
   // Find the cheapest plan: follow the backlinks
-  const plans = [];
+  const plans: Array<[TieredPlan, number]> = [];
   for(let i = backlinks.length - 1; i != 0; i = Math.max(0, i - backlinks[i].months)) {
-    plans.push(backlinks[i]);
+    if (plans.length > 0 && plans[plans.length-1][0] === backlinks[i]) {
+      plans[plans.length-1][1]++;
+    } else {
+      plans.push([backlinks[i], 1]);
+    }
   }
   plans.reverse();
   const best_cost = cost_so_far[cost_so_far.length-1];
   return [provider, plans, best_cost];
 }
 
-export function compute_plans(constraints: UserInput): [Provider, TieredPlan[], number][] {
+export function compute_plans(constraints: UserInput): [Provider, [TieredPlan, number][], number][] {
   const storage_for_months = compute_storage_requirements(constraints);
 
   const provider_plans = [];
