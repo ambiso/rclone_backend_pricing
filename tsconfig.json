@@ -5,7 +5,6 @@
         "moduleResolution": "node",
         "outDir": "dist",
         "baseUrl": ".",
-        "watch": true
     },
     "exclude": [
         "node_modules"
