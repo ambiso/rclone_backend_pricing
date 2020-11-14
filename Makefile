@@ -4,7 +4,8 @@ deploy:
 	cp -r dist/* .
 	git add *.js *.css *.html
 	git commit -m "Deploy"
-	git push
+	git push -u origin gh-pages
+	git switch main
 
 watch:
 	npx tsc -w --noEmit
