@@ -1,10 +1,10 @@
 deploy:
 	NODE_ENV=production parcel build src/index.html
 	git switch gh-pages
-	mv dist/* .
-	git add .
-	git commit -m "Deploy"
-	git push
+	shopt -s extglob
+	rm -rfvi !dist
+	cp -r dist/*
+	git add !dist
 
 watch:
 	npx tsc -w --noEmit
