@@ -1,33 +1,29 @@
 # rclone_backend_pricing
-Pricing calculator for backends supported by rclone
 
-# Dependencies
-
-## Node
-
-Install [nvm](https://github.com/nvm-sh/nvm)
-and run
-
+## Project setup
 ```
-nvm install node
+npm install
 ```
 
-put script it outputs into your .bashrc (or equivalent)
-
-## Parcel Bundler
-
+### Compiles and hot-reloads for development
 ```
-npm i -g parcel-bundler
+npm run serve
 ```
 
-# Build
+### Compiles and minifies for production
+```
+npm run build
+```
 
+### Run your unit tests
 ```
-make watch
+npm run test:unit
 ```
 
-# Deploy
+### Lints and fixes files
+```
+npm run lint
+```
 
-```
-make deploy
-```
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

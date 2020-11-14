@@ -1,5 +1,5 @@
 deploy:
-	npx tsc
+	NODE_ENV=production parcel build src/index.html
 	git subtree push --prefix dist origin gh-pages
 
 watch:
