@@ -44,7 +44,6 @@ function fichier_extra_cost(constraints: UserInput, plan: TieredPlan, storage: n
 }
 
 function backblaze_b2_extra_cost(constraints: UserInput, plan: TieredPlan, storage: number) {
-  console.log(storage);
   return storage * 0.005 + 0.01 * constraints.download_mo;
 }
 
@@ -134,7 +133,6 @@ function recompute() {
 
   let constraints = new UserInput(months, currency, initial_upload, upload_mo, delete_mo, download_mo, enterprise);
   let storage_for_months = compute_storage_requirements(constraints);
-  console.log(storage_for_months);
 
   let provider_plans = [];
   for (let provider of providers) {

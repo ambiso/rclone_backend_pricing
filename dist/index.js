@@ -41,7 +41,6 @@ function fichier_extra_cost(constraints, plan, storage) {
     }
 }
 function backblaze_b2_extra_cost(constraints, plan, storage) {
-    console.log(storage);
     return storage * 0.005 + 0.01 * constraints.download_mo;
 }
 function sample(array) {
@@ -111,7 +110,6 @@ function recompute() {
     let enterprise = document.getElementById("enterprise").value === "on";
     let constraints = new UserInput(months, currency, initial_upload, upload_mo, delete_mo, download_mo, enterprise);
     let storage_for_months = compute_storage_requirements(constraints);
-    console.log(storage_for_months);
     let provider_plans = [];
     for (let provider of providers) {
         provider_plans.push(choose_tiered_plan(constraints, provider, storage_for_months));
