@@ -28,15 +28,19 @@ class TieredPlan {
     constructor(
       readonly name: string,
       readonly months: number,
-      readonly price: number,
+      readonly cost: number,
       readonly storage_cap: number,
-      readonly extra_cost: (storage: number) => number,
+      readonly extra_cost: (plan: TieredPlan, storage: number) => number,
       readonly currency: Currency
     ) {}
 }
 
-function fichier_extra_cost(storage: number) {
-  return Math.max(0, Math.floor((storage-2000)/1000)*100);
+function fichier_extra_cost(plan: TieredPlan, storage: number) {
+  if (storage < 100*1000) { // Less than 100 TB
+    return Math.max(0, Math.floor((storage-2000)/1000)*100);
+  } else {
+    return Infinity;
+  }
 }
 
 function sample<T>(array: Array<T>): T {
@@ -71,42 +75,38 @@ function compute_storage_requirements(constraints: UserInput): number[] {
 }
 
 /// Returns a list of tiered plans to subscribe to in succession
-function choose_tiered_plan(provider: Provider, storage_for_months: number[], constraints: UserInput): [Provider, TieredPlan, number] {
-  let max_storage = storage_for_months.reduce((a, b) => Math.max(a, b));
-  let available_plans = [];
-  for (let plan of provider.tiered_plans) {
-      if (plan.storage_cap < max_storage && plan.extra_cost !== undefined) {
-          continue;
-      }
-      if (plan.months > constraints.months) {
-          continue;
-      }
-      available_plans.push(plan);
-  }
+function choose_tiered_plan(provider: Provider, storage_for_months: number[], constraints: UserInput): [Provider, TieredPlan[], number] {
+  let cost_so_far = new Array(constraints.months+1).fill(Infinity);
+  let backlinks: TieredPlan[] = new Array(constraints.months+1); // Which plan we took
 
-  let best_plan = undefined;
-  let best_cost = Infinity;
-  for (let plan of available_plans) {
-    // Compute the cost under this plan
-    let cost = 0;
-    let months_remaining = 0;
-    for (let s of storage_for_months) {
-      if (months_remaining == 0) {
-        months_remaining = plan.months;
-        cost += plan.price;
-      }
-      if (plan.storage_cap > s) {
-        cost += plan.extra_cost(s);
-      }
-      months_remaining -= 1
-    }
+  cost_so_far[0] = 0;
 
-    if (cost < best_cost) {
-      best_plan = plan;
-      best_cost = cost;
+  for (let i = 1; i <= constraints.months; ++i) {
+    for (let plan of provider.tiered_plans) {
+      if (plan.months > i) {
+        continue;
+      }
+
+      let extra_cost = 0;
+      for (let m = i-plan.months; m < i; ++m) {
+        extra_cost += plan.extra_cost(plan, storage_for_months[m]);
+      }
+
+      let cost_this_plan = cost_so_far[i-plan.months] + plan.cost + extra_cost;
+      if (cost_this_plan < cost_so_far[i]) {
+        cost_so_far[i] = cost_this_plan;
+        backlinks[i] = plan;
+      }
     }
   }
-  return [provider, best_plan, best_cost];
+  // Find the cheapest plan: follow the backlinks
+  let plans = [];
+  for(let i = backlinks.length - 1; i != 0; i -= backlinks[i].months) {
+    plans.push(backlinks[i]);
+  }
+  plans.reverse();
+  let best_cost = cost_so_far[cost_so_far.length-1];
+  return [provider, plans, best_cost];
 }
 
 function recompute() {
@@ -129,10 +129,10 @@ function recompute() {
 
   let results_table = <HTMLTableElement>document.getElementById("results");
   results_table.innerHTML = '';
-  for (let [provider, plan, cost] of provider_plans) {
+  for (let [provider, plans, cost] of provider_plans) {
     let row = results_table.insertRow(0);
     row.insertCell().appendChild(document.createTextNode(provider.name));
-    row.insertCell().appendChild(document.createTextNode(plan.name));
+    row.insertCell().appendChild(document.createTextNode(plans.map(x => x.name)));
     row.insertCell().appendChild(document.createTextNode(cost.toString()));
   }
 }
