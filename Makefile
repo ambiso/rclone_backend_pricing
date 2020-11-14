@@ -1,5 +1,5 @@
 deploy:
-	NODE_ENV=production parcel build src/index.html
+	NODE_ENV=production parcel build src/index.html --public-url="/rclone_backend_pricing/"
 	git switch gh-pages
 	cp -r dist/* .
 	git add *.js *.css *.html
