@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 class Provider {
   constructor(
     readonly name: string,
@@ -119,7 +121,7 @@ function choose_tiered_plan(constraints: UserInput, provider: Provider, storage_
   return [provider, plans, best_cost];
 }
 
-function recompute() {
+export function recompute() {
   let months = parseFloat((<HTMLInputElement>document.getElementById("months")).value);
   let currency = Currency[(<HTMLSelectElement>document.getElementById("currency")).value as keyof typeof Currency];
   let initial_upload = parseFloat((<HTMLInputElement>document.getElementById("initial_upload")).value);
@@ -146,3 +148,54 @@ function recompute() {
     row.insertCell().appendChild(document.createTextNode(cost.toString()));
   }
 }
+
+// recompute();
+    // <form>
+    //   <label for="months">
+    //     Months
+    //   </label>
+    //   <input type="number" id="months" min="1" max="1188" oninput="recompute()" value="1">
+
+    //   <label for="currency">
+    //     Currency
+    //   </label>
+    //   <select name="currency" id="currency" oninput="recompute()">
+    //     <option value="EUR">EUR</option>
+    //     <option value="USD">USD</option>
+    //   </select>
+
+    //   <label for="initial_upload">
+    //     Initial Upload (GB)
+    //   </label>
+    //   <input type="number" id="initial_upload" min="0" oninput="recompute()" value="1000">
+
+    //   <label for="download">
+    //     Download GB/mo
+    //   </label>
+    //   <input type="number" id="download" min="0" oninput="recompute()" value="250">
+
+    //   <label for="upload">
+    //     Upload GB/mo
+    //   </label>
+    //   <input type="number" id="upload" min="0" value="0" oninput="recompute()">
+
+    //   <label for="delete">
+    //     Delete GB/mo
+    //   </label>
+    //   <input type="number" id="delete" min="0" value="0" oninput="recompute()">
+
+    //   <label for="enterprise">
+    //     Enterprise
+    //   </label>
+    //   <input type="checkbox" id="enterprise" value="0" oninput="recompute()">
+    // </form>
+
+    // <table id="results">
+    // </table>
+
+var app = new Vue({ 
+    el: '#app',
+    data: {
+        message: 'Hello Vue!'
+    }
+});
