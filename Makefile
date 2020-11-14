@@ -1,6 +1,10 @@
 deploy:
 	NODE_ENV=production parcel build src/index.html
-	git subtree push --prefix dist origin gh-pages
+	git switch gh-pages
+	mv dist/* .
+	git add .
+	git commit -m "Deploy"
+	git push
 
 watch:
 	npx tsc -w --noEmit
