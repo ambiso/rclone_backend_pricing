@@ -116,7 +116,7 @@ function recompute() {
     for (let provider of providers) {
         provider_plans.push(choose_tiered_plan(constraints, provider, storage_for_months));
     }
-    provider_plans.sort((a, b) => a[1] - b[1]); // sort by price, decending
+    provider_plans.sort((a, b) => b[1] - a[1]); // sort by price, descending
     let results_table = document.getElementById("results");
     results_table.innerHTML = '';
     for (let [provider, plans, cost] of provider_plans) {
