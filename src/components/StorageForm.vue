@@ -73,12 +73,12 @@ export default class StorageForm extends Vue {
 
   get results(): [Provider, [TieredPlan, number][], number][] {
     return compute_plans(new UserInput(
-      this.months, 
+      this.months | 0, 
       Currency[this.currency as keyof typeof Currency], 
-      this.initial_upload, 
-      this.upload_mo, 
-      this.delete_mo, 
-      this.download_mo, 
+      this.initial_upload | 0, 
+      this.upload_mo | 0, 
+      this.delete_mo | 0, 
+      this.download_mo | 0, 
       this.enterprise
     ));
   }
