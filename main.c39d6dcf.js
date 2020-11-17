@@ -10297,7 +10297,7 @@ function (_super) {
 
   Object.defineProperty(StorageForm.prototype, "results", {
     get: function get() {
-      return (0, _storage_calulations.compute_plans)(new _storage_calulations.UserInput(this.months, _storage_calulations.Currency[this.currency], this.initial_upload, this.upload_mo, this.delete_mo, this.download_mo, this.enterprise));
+      return (0, _storage_calulations.compute_plans)(new _storage_calulations.UserInput(this.months | 0, _storage_calulations.Currency[this.currency], this.initial_upload | 0, this.upload_mo | 0, this.delete_mo | 0, this.download_mo | 0, this.enterprise));
     },
     enumerable: false,
     configurable: true
@@ -10725,7 +10725,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34811" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41327" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
