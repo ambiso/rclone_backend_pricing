@@ -10536,38 +10536,57 @@ exports.default = _default;
     _c(
       "table",
       { attrs: { id: "results" } },
-      _vm._l(_vm.results, function(item) {
-        return _c("tr", { key: item[0].name }, [
-          _c("td", [_vm._v("\n        " + _vm._s(item[0].name) + "\n      ")]),
-          _vm._v(" "),
-          _c(
-            "td",
-            _vm._l(item[1], function(plan) {
-              return _c(
-                "span",
-                { key: plan[0].name, staticClass: "plan-result" },
-                [
-                  _vm._v(
-                    "\n          " +
-                      _vm._s(plan[0].name) +
-                      " x" +
-                      _vm._s(plan[1]) +
-                      "\n        "
-                  )
-                ]
-              )
-            }),
-            0
-          ),
-          _vm._v(" "),
-          _c("td", [_vm._v("\n        " + _vm._s(item[2]) + "\n      ")])
-        ])
-      }),
-      0
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.results, function(item) {
+          return _c("tr", { key: item[0].name }, [
+            _c("td", [
+              _vm._v("\n        " + _vm._s(item[0].name) + "\n      ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "td",
+              _vm._l(item[1], function(plan) {
+                return _c(
+                  "span",
+                  { key: plan[0].name, staticClass: "plan-result" },
+                  [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(plan[0].name) +
+                        " x" +
+                        _vm._s(plan[1]) +
+                        "\n        "
+                    )
+                  ]
+                )
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c("td", [_vm._v("\n        " + _vm._s(item[2]) + "\n      ")])
+          ])
+        })
+      ],
+      2
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Provider")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Optimal Plan")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Price")])
+    ])
+  }
+]
 render._withStripped = true
 
           return {
@@ -10725,7 +10744,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41327" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46149" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
