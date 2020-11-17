@@ -41,6 +41,11 @@
   </form>
 
   <table id="results">
+    <thead>
+      <th>Provider</th>
+      <th>Optimal Plan</th>
+      <th>Price</th>
+    </thead>
     <tr v-for="item in results" v-bind:key="item[0].name">
       <td>
         {{item[0].name}}
@@ -101,6 +106,25 @@ input, select {
 
 .plan-result:not(:last-child)::after {
   content: ",";
+}
+
+table {
+  border:none;
+  border-collapse: collapse;
+}
+
+table td, table th {
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  padding: .3em 1em .3em 1em;
+}
+
+table td:first-child, table th:first-child {
+  border-left: none;
+}
+
+table td:last-child, table th:last-child {
+  border-right: none;
 }
 
 </style>
