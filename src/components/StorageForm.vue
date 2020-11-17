@@ -65,8 +65,8 @@ import { compute_plans, UserInput, Provider, TieredPlan, Currency } from '../sto
 export default class StorageForm extends Vue { 
   months = 12
   currency = 'EUR'
-  initial_upload = 1000
-  download_mo = 100
+  initial_upload = 3
+  download_mo = 0
   upload_mo = 0
   delete_mo = 0
   enterprise = false
