@@ -10555,7 +10555,9 @@ exports.default = _default;
                     _vm._v(
                       "\n          " +
                         _vm._s(plan[0].name) +
-                        " x" +
+                        " (" +
+                        _vm._s(plan[0].months) +
+                        " months) x" +
                         _vm._s(plan[1]) +
                         "\n        "
                     )
@@ -10744,7 +10746,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46149" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40185" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
