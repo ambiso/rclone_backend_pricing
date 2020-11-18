@@ -52,7 +52,7 @@
       </td>
       <td>
         <span class="plan-result" v-for="plan in item[1]" v-bind:key="plan[0].name">
-          {{ plan[0].name }} x{{plan[1]}}
+          {{ plan[0].name }} ({{ plan[0].months }} months) x{{plan[1]}}
         </span>
       </td>
       <td>
