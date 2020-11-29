@@ -48,7 +48,7 @@
     </thead>
     <tr v-for="item in results" v-bind:key="item[0].name">
       <td>
-        {{item[0].name}}
+        {{ item[0].name }}
       </td>
       <td>
         <span class="plan-result" v-for="plan in item[1]" v-bind:key="plan[0].name">
@@ -56,7 +56,7 @@
         </span>
       </td>
       <td>
-        {{item[2]}}
+        {{ item[2].isFinite() ? item[2].toString(2) : "cannot meet constraints" }}
       </td>
     </tr>
   </table>
