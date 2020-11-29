@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="calculator">
   <form>
     <label for="months">
       Months
@@ -75,6 +75,7 @@ export default class StorageForm extends Vue {
   upload_mo = 0
   delete_mo = 0
   enterprise = false
+  expanded = []
 
   get results(): [Provider, [TieredPlan, number][], number][] {
     return compute_plans(new UserInput(
@@ -111,20 +112,14 @@ input, select {
 table {
   border:none;
   border-collapse: collapse;
+  width: 100%;
 }
 
 table td, table th {
-  border-left: 1px solid #000;
-  border-right: 1px solid #000;
   padding: .3em 1em .3em 1em;
 }
 
-table td:first-child, table th:first-child {
-  border-left: none;
+table thead {
+  border-bottom: 1px solid black;
 }
-
-table td:last-child, table th:last-child {
-  border-right: none;
-}
-
 </style>
